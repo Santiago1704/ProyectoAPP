@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ProyectoApp</string>
+    <string name="txt_usuario">Usuario</string>
+    <string name="txt_password">Contraseña</string>
+    <string name="txt_log_in">Iniciar sesión</string>
+    <string name="txt_forgot_your_password">¿Olvido su contraseña?</string>
+    <string name="txt_create_account">Crear cuenta</string>
+    <string name="txt_description">Descripcion</string>
+    <string name="txt_first_name">Nombres</string>
+    <string name="txt_last_name">Apellidos</string>
+    <string name="txt_email">Correo Electronico</string>
+</resources>

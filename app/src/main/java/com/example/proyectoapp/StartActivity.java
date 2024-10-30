@@ -1,6 +1,7 @@
 package com.example.proyectoapp;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,10 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start);
+
+        String userName = getIntent().getStringExtra("USER_NAME");
+        TextView welcomeTextView = findViewById(R.id.textViewWelcome);
+        welcomeTextView.setText("Hola, " + userName + "!");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
