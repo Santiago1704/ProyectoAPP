@@ -1,8 +1,10 @@
 package com.example.proyectoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, usernameEditText, passwordEditText;
     private Button registerButton;
     private UserViewModel userViewModel;
+    private TextView textViewLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,10 @@ public class RegisterActivity extends AppCompatActivity {
         lastNameEditText = findViewById(R.id.editTextLastName);
         usernameEditText = findViewById(R.id.editTextUsername);
         passwordEditText = findViewById(R.id.editTextPassword);
+        textViewLogin = findViewById(R.id.textViewLogin);
         registerButton = findViewById(R.id.buttonRegister);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        textViewLogin.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, MainActivity.class)));
 
         registerButton.setOnClickListener(v -> registerUser());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/c_ff023a47"
+            android:textColor="@android:color/white"
             android:text="@string/txt_log_in"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
