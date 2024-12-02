@@ -9,4 +9,5 @@
     <string name="txt_first_name">Nombres</string>
     <string name="txt_last_name">Apellidos</string>
     <string name="txt_email">Correo Electronico</string>
+    <string name="hola">Hola</string>
 </resources>
