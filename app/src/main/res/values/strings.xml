@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoApp</string>
+    <string name="app_name">Walking Legs</string>
     <string name="txt_usuario">Usuario</string>
     <string name="txt_password">Contraseña</string>
     <string name="txt_log_in">Iniciar sesión</string>
@@ -10,4 +10,12 @@
     <string name="txt_last_name">Apellidos</string>
     <string name="txt_email">Correo Electronico</string>
     <string name="hola">Hola</string>
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="cerrar_sesi_n">Cerrar Sesión</string>
+    <string name="agregar_servicio">Agregar Servicio</string>
+    <string name="hola_administrador">Hola Administrador</string>
+    <string name="acciones">Acciones</string>
+    <string name="paseos_completados">Paseos Completados</string>
+    <string name="t_tulo">Título</string>
+    <string name="menu">menu</string>
 </resources>

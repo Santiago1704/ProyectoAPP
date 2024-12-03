@@ -40,10 +40,18 @@ public class MainActivity extends AppCompatActivity {
 
         userViewModel.getLoginUserLiveData().observe(this, user -> {
             if (user != null) {
-                Intent intent = new Intent(MainActivity.this, StartActivity.class);
-                intent.putExtra("USER_NAME", user.getFirst_name());
-                startActivity(intent);
-                finish();
+                if ("Santiago".equalsIgnoreCase(user.getFirst_name())) {
+                    // Redirigir al administrador
+                    Intent adminIntent = new Intent(MainActivity.this, AdminActivity.class);
+                    adminIntent.putExtra("USER_NAME", user.getFirst_name());
+                    startActivity(adminIntent);
+                } else {
+                    // Redirigir al usuario regular
+                    Intent intent = new Intent(MainActivity.this, StartActivity.class);
+                    intent.putExtra("USER_NAME", user.getFirst_name());
+                    startActivity(intent);
+                }
+                finish(); // Finaliza la actividad actual
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }

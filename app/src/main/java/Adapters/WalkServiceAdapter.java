@@ -27,11 +27,13 @@ public class WalkServiceAdapter extends ArrayAdapter<WalkService> {
         TextView textViewPetName = convertView.findViewById(R.id.textViewPetName);
         TextView textViewDuration = convertView.findViewById(R.id.textViewDuration);
         TextView textViewServiceDate = convertView.findViewById(R.id.textViewServiceDate);
+        TextView textViewWalkerName = convertView.findViewById(R.id.textViewWalkerName);
 
         textViewServiceName.setText(currentService.getServiceName());
         textViewPetName.setText(currentService.getPetName());
         textViewDuration.setText(currentService.getDuration());
         textViewServiceDate.setText(currentService.getServiceDate());
+        textViewWalkerName.setText("Paseador: " + currentService.getWalkerName());
 
         return convertView;
     }

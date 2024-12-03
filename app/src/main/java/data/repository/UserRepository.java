@@ -5,6 +5,8 @@ import android.content.Context;
 
 import androidx.room.Room;
 
+import java.util.List;
+
 import data.db.AppDatabase;
 import data.db.UserDao;
 import data.entity.UserEntity;
@@ -31,5 +33,17 @@ public class UserRepository {
 
     public UserEntity loginUser(String username, String password) {
         return userDao.login(username, password);
+    }
+
+    public List<UserEntity> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    public void updateUser(UserEntity user) {
+        new Thread(() -> userDao.update(user)).start();
+    }
+
+    public void deleteUser(UserEntity user) {
+        new Thread(() -> userDao.delete(user)).start();
     }
 }

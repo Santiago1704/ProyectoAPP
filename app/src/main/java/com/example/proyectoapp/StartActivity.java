@@ -3,11 +3,14 @@ package com.example.proyectoapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +25,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Adapters.Recomendation;
 import Adapters.RecommendationAdapter;
@@ -44,15 +49,57 @@ public class StartActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start);
 
+        ImageView imageViewProfile = findViewById(R.id.imageViewProfile);
+        imageViewProfile.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(StartActivity.this, v);
+            MenuInflater inflater = popupMenu.getMenuInflater();
+            inflater.inflate(R.menu.menu_profile_options, popupMenu.getMenu());
+
+            Map<Integer, Runnable> actions = new HashMap<>();
+            actions.put(R.id.menu_edit_profile, () -> {
+                Toast.makeText(this, "Editar Perfil seleccionado", Toast.LENGTH_SHORT).show();
+                // Lógica para editar perfil
+            });
+            actions.put(R.id.menu_logout, () -> {
+                Toast.makeText(this, "Cerrar Sesión seleccionado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            });
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                Runnable action = actions.get(item.getItemId());
+                if (action != null) {
+                    action.run();
+                    return true;
+                }
+                return false;
+            });
+
+            popupMenu.show();
+        });
+
         ListView listViewRecommendations = findViewById(R.id.listViewRecommendations);
         listViewCurrentWalks = findViewById(R.id.listViewCurrentWalks);
 
         currentWalkServices = new ArrayList<>();
-        currentWalkServices.add(new WalkService("Paseo 1", "Rex", "2 horas", "01/12/2024"));
-        currentWalkServices.add(new WalkService("Paseo 2", "Luna", "1 hora", "02/12/2024"));
+        currentWalkServices.add(new WalkService("Paseo 1", "Rex", "2 horas", "01/12/2024", "Juan Perez"));
+        currentWalkServices.add(new WalkService("Paseo 2", "Luna", "1 hora", "02/12/2024", "Pedro Ruiz"));
 
         walkServiceAdapter = new WalkServiceAdapter(this, currentWalkServices);
         listViewCurrentWalks.setAdapter(walkServiceAdapter);
+
+        listViewCurrentWalks.setOnItemClickListener((parent, view, position, id) -> {
+            WalkService selectedService = currentWalkServices.get(position);
+            Intent intent = new Intent(StartActivity.this, WalkDetailActivity.class);
+            intent.putExtra("serviceName", selectedService.getServiceName());
+            intent.putExtra("petName", selectedService.getPetName());
+            intent.putExtra("duration", selectedService.getDuration());
+            intent.putExtra("serviceDate", selectedService.getServiceDate());
+            intent.putExtra("walkerName", selectedService.getWalkerName());
+            startActivity(intent);
+        });
 
         List<Recomendation> recommendations = new ArrayList<>();
         recommendations.add(new Recomendation("Pet Shampoo", "A gentle shampoo for all pets.", R.drawable.ic_pet));
@@ -103,9 +150,10 @@ public class StartActivity extends AppCompatActivity {
             String duration = data.getStringExtra("SERVICE_DURATION");
             String petName = data.getStringExtra("PET_NAME");
             String serviceDate = data.getStringExtra("SERVICE_DATE");
+            String walkerName = data.getStringExtra("WALKER_NAME");
 
-            if (duration != null && petName != null && serviceDate != null) {
-                WalkService newService = new WalkService("Nuevo Paseo", petName, duration, serviceDate);
+            if (duration != null && petName != null && serviceDate != null && walkerName != null) {
+                WalkService newService = new WalkService("Nuevo Paseo", petName, duration, serviceDate, walkerName);
                 currentWalkServices.add(newService);
 
                 // Actualizar la lista

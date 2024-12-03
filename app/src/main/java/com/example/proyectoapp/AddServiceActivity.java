@@ -23,20 +23,23 @@ public class AddServiceActivity extends AppCompatActivity {
         EditText editTextDuration = findViewById(R.id.editTextDuration);
         EditText editTextPetName = findViewById(R.id.editTextPetName);
         EditText editTextServiceDate = findViewById(R.id.editTextServiceDate);
+        EditText editTextWalkerName = findViewById(R.id.editTextWalkerName);
 
         Button buttonSaveService = findViewById(R.id.buttonSaveService);
         buttonSaveService.setOnClickListener(v -> {
             String duration = editTextDuration.getText().toString();
             String petName = editTextPetName.getText().toString();
             String serviceDate = editTextServiceDate.getText().toString();
+            String walkerName = editTextWalkerName.getText().toString();
 
-            if (duration.isEmpty() || petName.isEmpty() || serviceDate.isEmpty()) {
+            if (duration.isEmpty() || petName.isEmpty() || serviceDate.isEmpty() || walkerName.isEmpty()) {
                 Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
             } else {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("SERVICE_DURATION", duration);
                 resultIntent.putExtra("PET_NAME", petName);
                 resultIntent.putExtra("SERVICE_DATE", serviceDate);
+                resultIntent.putExtra("WALKER_NAME", walkerName);
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }

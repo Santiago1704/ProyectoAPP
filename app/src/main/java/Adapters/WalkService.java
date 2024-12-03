@@ -5,12 +5,14 @@ public class WalkService {
     private String petName;
     private String duration;
     private String serviceDate;
+    private String walkerName;
 
-    public WalkService(String serviceName, String petName, String duration, String serviceDate) {
+    public WalkService(String serviceName, String petName, String duration, String serviceDate, String walkerName) {
         this.serviceName = serviceName;
         this.petName = petName;
         this.duration = duration;
         this.serviceDate = serviceDate;
+        this.walkerName = walkerName;
     }
 
     public String getServiceName() {
@@ -43,5 +45,13 @@ public class WalkService {
 
     public void setServiceDate(String serviceDate) {
         this.serviceDate = serviceDate;
+    }
+
+    public String getWalkerName() {
+        return walkerName;
+    }
+
+    public void setWalkerName(String walkerName) {
+        this.walkerName = walkerName;
     }
 }
